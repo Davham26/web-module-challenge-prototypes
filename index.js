@@ -14,11 +14,25 @@
     - Give instances of Person a method `.toString()`:
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
-
-function Person() {
-
+const personPrototype = {
+  eat(someFood) {
+    if (this.stomach.length <= 9) {
+      this.stomach.push(someFood);
+    }
+  },
+  poop(){
+    this.stomach = [];
+  },
+  toString(){
+     return `${this.name}, ${this.age}`;
+  }
 }
-
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+  }
+Object.assign(Person.prototype, personPrototype);
 
 /*
   TASK 2
@@ -36,10 +50,22 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+const carPrototype = {
+  fill(gallons) {
+    this.tank = this.tank + gallons;
+    },
+  drive(distance){
+    this.odometer += distance;
+    this.tank -= (distance / this.milesPerGallon);
+  }
 }
-
+function Car(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+Object.assign(Car.prototype, carPrototype);
 
 /*
   TASK 3
@@ -49,10 +75,14 @@ function Car() {
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby() {
+function Baby(name, age, favoriteToy) {
+  new Person(name, age);
+  this.favoriteToy = favoriteToy;
+  }
+Object.assign(Baby.prototype, personPrototype);
 
-}
-
+const Elias = Baby('Elias', 1, 'car');
+console.log(Elias);
 
 /* 
   TASK 4
