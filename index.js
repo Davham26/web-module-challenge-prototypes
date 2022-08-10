@@ -75,15 +75,21 @@ Object.assign(Car.prototype, carPrototype);
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby(name, age, favoriteToy) {
-  new Person(name, age);
-  this.favoriteToy = favoriteToy;
+const babyPrototype = {
+  play() {
+    return `Playing with ${this.favoriteToy}`
   }
+}
+function Baby(name, age, favoriteToy){
+  this.name = name;
+  this.age = age;
+  this.favoriteToy = favoriteToy;
+}
 Object.assign(Baby.prototype, personPrototype);
+Object.assign(Baby.prototype, babyPrototype);
 
-const Elias = Baby('Elias', 1, 'car');
+const Elias = new Baby('Elias', 1, 'car');
 console.log(Elias);
-
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
